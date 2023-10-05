@@ -9,7 +9,7 @@ fi
 #create files
 sudo mkdir -p /data/web_static/shared/
 sudo mkdir -p /data/web_static/releases/test/ 
-sudo touch data/web_static/releases/test/index.html
+sudo touch /data/web_static/releases/test/index.html
 
 #create test HTML file
 echo "<html><body><h1>AirBnB clone</h1></body>" > data/web_static/releases/test/index.html 
