@@ -12,8 +12,7 @@ sudo mkdir -p /data/web_static/releases/test/
 sudo touch data/web_static/releases/test/index.html
 
 #create test HTML file
-sudo echo "<html>
-	<body><h1>AirBnB clone</h1></body>" > data/web_static/releases/test/index.html 
+echo "<html><body><h1>AirBnB clone</h1></body>" > data/web_static/releases/test/index.html 
 #create sympolic link
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 #set ownership
