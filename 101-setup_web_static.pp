@@ -29,3 +29,6 @@ command => "/usr/bin/env sed -i '/listen 80 default_server;/a \\n\tlocation /hbn
 exec {'restart nginx': 
 command => '/usr/bin/env service nginx restart',
 }
+exec { 'exit 0':
+  command => '/usr/bin/env exit 0',
+}
