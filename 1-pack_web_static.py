@@ -9,6 +9,9 @@ from fabric.api import local
 
 
 def do_pack():
+    """
+    makeing archive
+    """
     try:
         if not os.path.exists("versions"):
             os.makedirs("versions")
