@@ -1,7 +1,4 @@
 #puppet deployment of server
-exec {'install nginx':
-    command => '/usr/bin/env',
-}
 exec {'update server':
     command => '/usr/bin/env apt update',
 }
