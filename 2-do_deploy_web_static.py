@@ -5,7 +5,7 @@ extarct archive to severs
 """
 
 import os
-from fabric import Connection
+from fabric.api  import run, put, env
 
 
 def do_deploy(archive_path):
