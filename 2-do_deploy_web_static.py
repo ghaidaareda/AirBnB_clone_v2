@@ -5,7 +5,7 @@ extarct archive to severs
 """
 
 import os
-from fabric.api import run, env,put
+from fabric.api import run, env, put
 
 
 def do_deploy(archive_path):
@@ -19,14 +19,14 @@ def do_deploy(archive_path):
 
     try:
         put(archive_path, remote_path)
-        run("mkdir -p /data/web_static/releases/{}/".format(archive_no_ext),key_filename=~/.ssh/school
-            )
+        run("mkdir -p /data/web_static/releases/{}/".format(archive_no_ext),
+            key_filename=~/.ssh/school)
         run("tar -xzf {} -C /data/web_static/releases/{}/"
             .format(remote_path, archive_no_ext))
         run("rm {}".format(remote_path))
         run("mv /data/web_static/releases/{}/web_static/* "
             "/data/web_static/releases/{}/".format(archive_no_ext,
-                                                    archive_no_ext))
+                                                   archive_no_ext))
         run("rm -rf /data/web_static/releases/{}/web_static"
             .format(archive_no_ext))
         run("rm -rf /data/web_static/current")
