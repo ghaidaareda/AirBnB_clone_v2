@@ -18,8 +18,8 @@ def do_deploy(archive_path):
         put(archive_path, '/tmp/')
         no_ext = os.path.splitext(os.path.basename(archive_path))[0]
         remote_dir = '/data/web_static/releases/{}'.format(no_ext)
-        c.run('sudo mkdir -p {}'.format(remote_dir))
-        c.run('sudo tar -xzf {} -C {}'.format(remote, remote_dir))
-        c.run('sudo service nginx restart')
+        run('sudo mkdir -p {}'.format(remote_dir))
+        run('sudo tar -xzf {} -C {}'.format(remote, remote_dir))
+        run('sudo service nginx restart')
     else:
         return False
