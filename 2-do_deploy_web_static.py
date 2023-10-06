@@ -5,21 +5,35 @@ extarct archive to severs
 """
 
 import os
-from fabric import Connection
+from fabric.api import run, env,put
 
 
 def do_deploy(archive_path):
-    """
-    extract the archive to server
-    """
-    if archive_path:
-        env.hosts = ['100.26.50.163', '107.22.142.93']
-        remote = '/tmp/{}'.format(os.path.basename(archive_path))
-        put(archive_path, '/tmp/')
-        no_ext = os.path.splitext(os.path.basename(archive_path))[0]
-        remote_dir = '/data/web_static/releases/{}'.format(no_ext)
-        c.run('sudo mkdir -p {}'.format(remote_dir))
-        c.run('sudo tar -xzf {} -C {}'.format(remote, remote_dir))
-        c.run('sudo service nginx restart')
-    else:
+    if not os.path.exists(archive_path):
+        print(f"Archive file not found: {archive_path}")
+        return False
+
+    archive_name = os.path.basename(archive_path)
+    archive_no_ext = os.path.splitext(archive_name)[0]
+    remote_path = "/tmp/{}".format(archive_name)
+
+    try:
+        put(archive_path, remote_path)
+        run("mkdir -p /data/web_static/releases/{}/".format(archive_no_ext),key_filename=~/.ssh/school
+            )
+        run("tar -xzf {} -C /data/web_static/releases/{}/"
+            .format(remote_path, archive_no_ext))
+        run("rm {}".format(remote_path))
+        run("mv /data/web_static/releases/{}/web_static/* "
+            "/data/web_static/releases/{}/".format(archive_no_ext,
+                                                    archive_no_ext))
+        run("rm -rf /data/web_static/releases/{}/web_static"
+            .format(archive_no_ext))
+        run("rm -rf /data/web_static/current")
+        run("ln -s /data/web_static/releases/{}/ "
+            "/data/web_static/current".format(archive_no_ext))
+        print("New version deployed!")
+        return True
+    except Exception as e:
+        print("Deployment failed: {}".format(e))
         return False
