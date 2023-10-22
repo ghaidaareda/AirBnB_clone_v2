@@ -18,6 +18,7 @@ def hbnb():
     """hbnb_page"""
     return "HBNB"
 
+
 @my_app.route("/c/<text>", strict_slashes=False)
 def variable(text):
     """text_page"""
