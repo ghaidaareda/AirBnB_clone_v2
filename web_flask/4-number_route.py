@@ -25,8 +25,8 @@ def variable(text):
     return "C {}".format(text.replace('_', ' '))
 
 
-
-@my_app.route("/python/<text>", strict_slashes=False , defaults={'text': 'is cool'})
+@my_app.route("/python/", defaults={"text": "is cool"}, strict_slashes=False)
+@my_app.route("/python/<text>", strict_slashes=False)
 def py_variable(text):
     """text_page"""
     return "Python {}".format(text.replace('_', ' '))
