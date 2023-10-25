@@ -8,6 +8,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 from models.base_model import BaseModel, Base
+from models import storage
 
 # creation of a State
 state = State(name="California")
